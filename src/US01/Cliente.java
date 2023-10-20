@@ -1,14 +1,13 @@
 package US01;
 
 public class Cliente extends Usuario {
-    public Cliente(String idAutenticacao,String nomeCliente, String tipoCliente,long documento){
-        super(idAutenticacao, nomeCliente, tipoCliente, documento);
-        if(idAutenticacao.substring(0,idAutenticacao.length()-1).equals("CLI")){
-            return;
-        }
+    public Cliente(String idUsuario,String nomeCliente, String tipoCliente,long documento){
+        super(idUsuario, nomeCliente, tipoCliente, documento);
+        this.idUsuario = idUsuario;
         this.nomeUsuario = nomeCliente;
         this.tipoUsuario = tipoCliente;
         this.documento = documento;
     }
     public Cliente(){}
+
 }

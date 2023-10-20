@@ -11,4 +11,9 @@ public class Administrador extends US01.Usuario {
         this.documento = documento;
     }
     public Administrador(){}
+
+    @Override
+    public boolean cadastraUsuario(String novoTipoUsuario) {
+        return true;
+    }
 }
