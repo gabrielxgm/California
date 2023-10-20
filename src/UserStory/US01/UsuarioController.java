@@ -1,4 +1,4 @@
-package US01;
+package UserStory.US01;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ public class UsuarioController {
         this.mapaUsuario = new HashMap<>();
         this.contadorIdSeq = 1;
     }
-    public void cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento){
+    public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento){
         if(!mapaUsuario.get(idAutenticacao).cadastraUsuario(tipoUsuario)){
             throw new IllegalArgumentException();
         }
@@ -20,8 +20,9 @@ public class UsuarioController {
         usuarioNovo.cadastraDadosDoProprioUsuario(tipoUsuario+contadorIdSeq, nomeUsuario, tipoUsuario, documento);
         mapaUsuario.put(tipoUsuario+contadorIdSeq,usuarioNovo);
         contadorIdSeq++;
+        return "Cadastrado com sucesso";
     }
-    public void atualizarUsuario(String idAutenticacao,String idUsuario,String novoTipoUsuario) {
+    public String atualizarUsuario(String idAutenticacao,String idUsuario,String novoTipoUsuario) {
         if(!Objects.equals(mapaUsuario.get(idAutenticacao).getTipoUsuario(), "ADM")){
             throw new IllegalArgumentException();
         }
@@ -41,6 +42,7 @@ public class UsuarioController {
                 }
             }
         }
+        return "Atualizado com sucesso";
     }
     public Usuario verificaTipoUsuario(String tipoUsuario){
         return switch (tipoUsuario) {

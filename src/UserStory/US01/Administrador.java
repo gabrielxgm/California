@@ -1,6 +1,6 @@
-package US01;
+package UserStory.US01;
 
-public class Administrador extends US01.Usuario {
+public class Administrador extends UserStory.US01.Usuario {
     public Administrador(String idAutenticacao,String nomeAdmin, String tipoAdmin,long documento){
         super(idAutenticacao,nomeAdmin,tipoAdmin,documento);
         if(!idAutenticacao.substring(0,idAutenticacao.length()-1).equals("ADM")){

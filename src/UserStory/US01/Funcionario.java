@@ -1,4 +1,4 @@
-package US01;
+package UserStory.US01;
 
 public class Funcionario extends Usuario {
     public Funcionario(String idUsuario,String nomeFun, String tipoFun,long documento){
@@ -9,6 +9,11 @@ public class Funcionario extends Usuario {
         this.documento = documento;
     }
     public Funcionario(){}
+
+    @Override
+    public boolean podeCadastrarRefeicao() {
+        return true;
+    }
 
     @Override
     public boolean cadastraUsuario(String tipoUsuarioNovo) {

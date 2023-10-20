@@ -1,4 +1,4 @@
-package US01;
+package UserStory.US01;
 
 public class Cliente extends Usuario {
     public Cliente(String idUsuario,String nomeCliente, String tipoCliente,long documento){

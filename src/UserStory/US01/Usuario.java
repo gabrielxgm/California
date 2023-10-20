@@ -1,4 +1,4 @@
-package US01;
+package UserStory.US01;
 
 public abstract class Usuario{
     protected String idUsuario;
@@ -15,9 +15,6 @@ public abstract class Usuario{
         setNomeUsuario(nomeUsuario);
         setTipoUsuario(tipoUsuario);
         setDocumento(documento);
-    }
-    public void atualizarUsuario(String novoTipoUsuario){
-        this.tipoUsuario = tipoUsuario;
     }
 
     public void setNomeUsuario(String nomeUsuario) {
@@ -50,6 +47,9 @@ public abstract class Usuario{
 
     public String getIdUsuario() {
         return idUsuario;
+    }
+    public boolean podeCadastrarRefeicao(){
+        return false;
     }
 
     @Override
