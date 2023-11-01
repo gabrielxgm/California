@@ -49,6 +49,8 @@ public class Refeicao {
     public Refeicao(Long idRefeicao,String tipoRefeicao,String titulo,LocalTime horarioInicio,LocalTime horarioFinal
             ,double valorRefeicao,boolean disponivel){
         this.idRefeicao = idRefeicao;
+        tipoRefeicao = tipoRefeicao.replaceAll("_","-");
+        tipoRefeicao = tipoRefeicao.substring(0,1).toUpperCase().concat(tipoRefeicao.substring(1));
         this.tipoRefeicao = tipoRefeicao;
         this.titulo = titulo;
         this.horarioInicio = horarioInicio;

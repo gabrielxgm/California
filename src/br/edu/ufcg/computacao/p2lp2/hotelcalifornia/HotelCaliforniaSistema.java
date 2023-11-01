@@ -55,7 +55,7 @@ public class HotelCaliforniaSistema {
 	 * @param documento documento do usuário nov
 	 * @return representação textual de confirmação do cadastro
 	 */
-	public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) throws HotelCaliforniaException.UsuarioAutenticacaoNaoExisteAoCadastrar {
+	public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) {
 		return usuarioController.cadastrarUsuario(idAutenticacao, nomeUsuario, tipoUsuario, documento);
 	}
 
@@ -83,7 +83,7 @@ public class HotelCaliforniaSistema {
 	 * Lista os dados de todos usuários
 	 * @return lista de todos os usuários cadastrados
 	 */
-	public ArrayList<String> listarUsuarios(){
+	public String[] listarUsuarios(){
 		return usuarioController.listarUsuarios();
 	}
 

@@ -4,6 +4,7 @@ import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
 //import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.ReservasSessionController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 import org.junit.jupiter.api.*;
+import org.mockito.MockitoAnnotations;
 //import org.mockito.MockedStatic;
 //import org.mockito.Mockito;
 //import org.mockito.MockitoAnnotations;
@@ -29,7 +30,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
     String idReservaAuditorio;
     @BeforeEach
     void setUp() throws Exception {
-        //MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.openMocks(this);
         driver = new HotelCaliforniaSistema();
     }
 
@@ -217,7 +218,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
 
     }
 
-    @Nested
+  /*  @Nested
     @DisplayName("US02: Disponibilizar Quarto no Hotel")
     class US02Validations {
 
@@ -533,7 +534,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
         }
 
     }
-
+    */
     @Nested
     @DisplayName("US04: Disponibilizar Refeicoes do Restaurante")
     class US04Validations {

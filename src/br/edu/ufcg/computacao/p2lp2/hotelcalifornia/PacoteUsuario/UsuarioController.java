@@ -14,6 +14,7 @@ private Map<String,Usuario> mapaUsuario;
  * Contador sequencial de identificação do usuário
  */
 private static int contadorIdSeq;
+private static HotelCaliforniaException hce;
 
 /**
  * Cria um controlador de usuários
@@ -33,9 +34,9 @@ public UsuarioController(){
  * @param documento documento do usuário
  * @return representação textual de confirmação de usuário
  */
-public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) throws HotelCaliforniaException.UsuarioAutenticacaoNaoExisteAoCadastrar {
+public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento)  {
         if(!mapaUsuario.containsKey(idAutenticacao)){
-        throw new HotelCaliforniaException.UsuarioAutenticacaoNaoExisteAoCadastrar();
+                throw new HotelCaliforniaException("USUARIO NAO EXISTE");
         }
 
         if(!mapaUsuario.get(idAutenticacao).getFuncaoUsuario().cadastraUsuario(tipoUsuario))
@@ -121,13 +122,15 @@ public String exibirUsuario(String idUsuario){
  * Lista todos os usuários
  * @return lista das representações textuais de todos os usuários
  */
-public ArrayList<String> listarUsuarios(){
-        ArrayList<String> listaUsuario = new ArrayList<>();
+public String[] listarUsuarios(){
+        String[] listaUsuario = new String[mapaUsuario.size()];
+        int i = 0;
         for(Usuario usuario:mapaUsuario.values()){
-        listaUsuario.add(usuario.toString());
+        listaUsuario[i] = usuario.getTipoUsuario()+usuario.getIdUsuario();
+        i++;
         }
         return listaUsuario;
-        }
+}
 
 /**
  * Acessa os dados de mapa de usuários

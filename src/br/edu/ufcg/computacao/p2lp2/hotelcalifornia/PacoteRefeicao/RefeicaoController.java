@@ -45,7 +45,7 @@ public class RefeicaoController {
     public String disponibilizarRefeicao(String idAutenticacao,String tipoRefeicao,String titulo, LocalTime horarioInicio
             ,LocalTime horarioFinal,double valorRefeicao,boolean disponivel){
 
-        if(!(tipoRefeicao.equals("Jantar") || tipoRefeicao.equals("Almoco") || tipoRefeicao.equals("Cafe-da-manha")))
+        if(!(tipoRefeicao.equals("JANTAR") || tipoRefeicao.equals("ALMOCO") || tipoRefeicao.equals("CAFE_DA_MANHA")))
             throw new IllegalArgumentException("Tipo de refeição inválido");
 
         if(!HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeCadastrarRefeicao())
