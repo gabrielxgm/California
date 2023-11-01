@@ -19,7 +19,7 @@ private static int contadorIdSeq;
  * Cria um controlador de usuários
  */
 public UsuarioController(){
-        mapaUsuario.clear();
+        //mapaUsuario.clear();
         mapaUsuario.put("ADM1",new Usuario(1,"Joao Costa","ADM",123456));
         mapaUsuario.get("ADM1").setFuncaoUsuario("ADM");
         contadorIdSeq = 2;
@@ -102,12 +102,12 @@ public String atualizarUsuario(String idAutenticacao,String idUsuario,String nov
  */
 public boolean verificaSeExisteGerente(){
         for(Usuario usuario: mapaUsuario.values()){
-        if(usuario.getTipoUsuario().equals("GER")){
+                if(usuario.getTipoUsuario().equals("GER")){
         return true;
-        }
+                }
         }
         return false;
-        }
+}
 
 /**
  * Exibe os dados de usuário

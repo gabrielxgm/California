@@ -38,7 +38,7 @@ public class HotelCaliforniaSistema {
 	 * Cria um sistema do hotel California
 	 */
 	HotelCaliforniaSistema(){
-		usuarioController = UsuarioController.getInstance();
+		usuarioController = new UsuarioController();
 		refeicaoController = new RefeicaoController();
 		pagamentoController = new PagamentoController();
 		quartoController = new QuartoController();
