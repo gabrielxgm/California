@@ -33,7 +33,7 @@ public UsuarioController(){
  * @param documento documento do usuário
  * @return representação textual de confirmação de usuário
  */
-public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento){
+public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) throws Exception{
         if(!mapaUsuario.containsKey(idAutenticacao)){
         throw new HotelCaliforniaException;
         }
