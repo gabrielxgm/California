@@ -33,9 +33,9 @@ public UsuarioController(){
  * @param documento documento do usuário
  * @return representação textual de confirmação de usuário
  */
-public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) throws Exception{
+public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) throws HotelCaliforniaException.UsuarioAutenticacaoNaoExisteAoCadastrar {
         if(!mapaUsuario.containsKey(idAutenticacao)){
-        throw new HotelCaliforniaException;
+        throw new HotelCaliforniaException.UsuarioAutenticacaoNaoExisteAoCadastrar();
         }
 
         if(!mapaUsuario.get(idAutenticacao).getFuncaoUsuario().cadastraUsuario(tipoUsuario))

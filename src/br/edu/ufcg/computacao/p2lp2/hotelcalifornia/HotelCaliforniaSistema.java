@@ -6,6 +6,7 @@ import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US02.QuartoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US03.ReservaDeQuartoControler;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao.RefeicaoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacotePagamento.PagamentoController;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class HotelCaliforniaSistema {
 	 * @param documento documento do usuário nov
 	 * @return representação textual de confirmação do cadastro
 	 */
-	public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento){
+	public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) throws HotelCaliforniaException.UsuarioAutenticacaoNaoExisteAoCadastrar {
 		return usuarioController.cadastrarUsuario(idAutenticacao, nomeUsuario, tipoUsuario, documento);
 	}
 
