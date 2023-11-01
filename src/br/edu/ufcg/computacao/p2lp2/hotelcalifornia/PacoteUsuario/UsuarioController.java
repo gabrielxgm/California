@@ -1,5 +1,5 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario;
-
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,8 +35,7 @@ public UsuarioController(){
  */
 public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento){
         if(!mapaUsuario.containsKey(idAutenticacao)){
-        // corrigir dps
-        throw new RuntimeException("ERRO");
+        throw new HotelCaliforniaException;
         }
 
         if(!mapaUsuario.get(idAutenticacao).getFuncaoUsuario().cadastraUsuario(tipoUsuario))
@@ -53,7 +52,7 @@ public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String t
         mapaUsuario.put(tipoUsuario+contadorIdSeq,new Usuario(contadorIdSeq,nomeUsuario,tipoUsuario,documento));
         mapaUsuario.get(tipoUsuario+contadorIdSeq).setFuncaoUsuario(tipoUsuario);
         contadorIdSeq++;
-        return "Cadastrado com sucesso";
+        return tipoUsuario;
         }
 
 /**

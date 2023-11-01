@@ -1,5 +1,6 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia;
 
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao.Refeicao;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US02.QuartoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US03.ReservaDeQuartoControler;
@@ -16,7 +17,7 @@ public class HotelCaliforniaSistema {
 	/**
 	 * Controlador de usuários
 	 */
-	static UsuarioController usuarioController;
+	 static UsuarioController usuarioController;
 	/**
 	 * Controlador de refeição
 	 */
@@ -183,7 +184,16 @@ public class HotelCaliforniaSistema {
 		return reservaDeQuartoControler.cancelarReserva(idCliente,idReserva);
 	}
 
-	public static UsuarioController getUsuarioController() {
+	public static synchronized UsuarioController getUsuarioController() {
+		if(usuarioController == null){
+			usuarioController = new UsuarioController();
+		}
 		return usuarioController;
+	}
+	public static synchronized RefeicaoController getRefeicaoController(){
+		if(refeicaoController == null){
+			refeicaoController = new RefeicaoController();
+		}
+		return refeicaoController;
 	}
 }

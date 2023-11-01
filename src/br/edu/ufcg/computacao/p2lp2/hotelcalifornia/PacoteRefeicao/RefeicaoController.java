@@ -1,6 +1,7 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao;
 
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Map;
  * Controlador de refeição
  */
 public class RefeicaoController {
+    private UsuarioController usuarioController;
     /**
      * Mapa de refeições
      */
@@ -24,6 +26,7 @@ public class RefeicaoController {
      * Cria um controlador de refeição
      */
     public RefeicaoController(){
+        this.usuarioController = UsuarioController.getInstance();
         this.mapaRefeicao = new HashMap<>();
         this.contadorIdRefeicao = 1;
     }
