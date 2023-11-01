@@ -9,7 +9,7 @@ public class UsuarioController{
 /**
  * Mapa de usuários
  */
-private static Map<String,Usuario> mapaUsuario;
+private Map<String,Usuario> mapaUsuario;
 /**
  * Contador sequencial de identificação do usuário
  */
@@ -19,7 +19,7 @@ private static int contadorIdSeq;
  * Cria um controlador de usuários
  */
 public UsuarioController(){
-        //mapaUsuario.clear();
+        mapaUsuario = new HashMap<>();
         mapaUsuario.put("ADM1",new Usuario(1,"Joao Costa","ADM",123456));
         mapaUsuario.get("ADM1").setFuncaoUsuario("ADM");
         contadorIdSeq = 2;
