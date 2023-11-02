@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class Reserva {
-    private int id;
+    private long id;
     private Usuario usuario;
     private QuartoI quarto;
     private int numeroDeHospedes;
@@ -27,7 +27,7 @@ public class Reserva {
      */
     private boolean statusCancelado;
 
-    public Reserva(int id, Usuario usuario, int idQuarto, int numeroDeHospedes, ArrayList<Refeicao> refiecoes, boolean pagamento, LocalDateTime dataInicio, LocalDateTime dataFinal) {
+    public Reserva(long id, Usuario usuario, int idQuarto, int numeroDeHospedes, ArrayList<Refeicao> refiecoes, boolean pagamento, LocalDateTime dataInicio, LocalDateTime dataFinal) {
         this.id = id;
         this.usuario = usuario;
         this.quarto = controllerQuarto.getQuarto(idQuarto);

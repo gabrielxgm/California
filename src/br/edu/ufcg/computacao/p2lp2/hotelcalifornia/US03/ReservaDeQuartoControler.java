@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US03;
 
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.Usuario;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US02.QuartoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao.Refeicao;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
@@ -12,13 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.time.LocalDateTime;
 public class ReservaDeQuartoControler {
-    private Map<Integer, Reserva> mapReservas;
+    private UsuarioController usuarioController;
+    private Map<Long, Reserva> mapReservas;
 
     public ReservaDeQuartoControler() {
+        this.usuarioController = HotelCaliforniaSistema.getUsuarioController();
         this.mapReservas = new HashMap<>();
     }
 
-    public void criaReserva(int idReserva, Usuario usuario, int idQuarto, int numeroDeHospedes, ArrayList<Refeicao> refiecoes, boolean pagamento, LocalDateTime dataInicio, LocalDateTime dataFinal){
+    public void criaReserva(long idReserva, Usuario usuario, int idQuarto, int numeroDeHospedes, ArrayList<Refeicao> refiecoes, boolean pagamento, LocalDateTime dataInicio, LocalDateTime dataFinal){
 
         QuartoController controllerQuarto = new QuartoController();
         if(numeroDeHospedes > controllerQuarto.getQuarto(idQuarto).getVagas()){
@@ -27,7 +30,7 @@ public class ReservaDeQuartoControler {
 
         Reserva novaReserva = new Reserva(idReserva, usuario, idQuarto, numeroDeHospedes, refiecoes, pagamento, dataInicio, dataFinal);
 
-        for(Map.Entry<Integer, Reserva> reserva : mapReservas.entrySet()){
+        for(Map.Entry<Long, Reserva> reserva : mapReservas.entrySet()){
 
             if(reserva.getValue().getDataInicio().isBefore(dataFinal) & (reserva.getValue().getQuarto().getId() == idQuarto)){
                 throw new IllegalArgumentException("quarto ainda estara em uso nessa data");
@@ -40,16 +43,11 @@ public class ReservaDeQuartoControler {
     }
 
     public String cancelarReserva(String idCliente,String idReserva) {
-        if(!HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idCliente).getFuncaoUsuario().podePagarReserva())
-            throw new IllegalArgumentException("Usuário não pode pagar reserva");
 
-        if(!mapReservas.get(Integer.parseInt(idReserva)).getUsuario().equals(HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idCliente)))
-            throw new IllegalArgumentException("Somente o cliente que fez o cadastro da reserva pode fazer seu pagamento");
+        if(!mapReservas.get(Long.parseLong(idReserva)).getUsuario().equals(usuarioController.getMapaUsuario().get(idCliente)))
+            throw new HotelCaliforniaException("SOMENTE O PROPRIO CLIENTE PODERA CANCELAR A SUA RESERVA");
 
-        if(ChronoUnit.DAYS.between(LocalDateTime.now(),mapReservas.get(Integer.parseInt(idReserva)).getDataInicio()) < 1)
-            throw new HotelCaliforniaException("Só é possível cancelar a reserva até 1 dia antes de seu início");
-
-        mapReservas.get(Integer.parseInt(idReserva)).setStatusCancelado(true);
-        return mapReservas.get(Integer.parseInt(idReserva)).toString();
+        mapReservas.get(Long.parseLong(idReserva)).setStatusCancelado(true);
+        return mapReservas.get(Long.parseLong(idReserva)).toString();
     }
 }
