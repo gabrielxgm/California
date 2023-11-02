@@ -130,7 +130,7 @@ public class HotelCaliforniaSistema {
 	 * Lista os dados de todas as refeições cadastradas
 	 * @return lista de refeições
 	 */
-	public ArrayList<String> listarRefeicoes(){
+	public String[] listarRefeicoes(){
 		return refeicaoController.listarRefeicoes();
 	}
 
@@ -170,7 +170,7 @@ public class HotelCaliforniaSistema {
 	 * Lista os dados de todos os pagamentos
 	 * @return lista de pagamentos
 	 */
-	public ArrayList<String> listarFormasPagamentos(){
+	public String[] listarFormasPagamentos(){
 		return pagamentoController.listarFormasPagamentos();
 	}
 

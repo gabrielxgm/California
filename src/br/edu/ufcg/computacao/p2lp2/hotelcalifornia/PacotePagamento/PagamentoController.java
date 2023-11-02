@@ -1,6 +1,8 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacotePagamento;
 
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.Map;
  * Controlador de pagamentos
  */
 public class PagamentoController {
+    private UsuarioController usuarioController;
     /**
      * Mapa de pagamentos acessados a partir de um identificador sequencial inteiro
      */
@@ -23,6 +26,7 @@ public class PagamentoController {
      * Cria um controller de pagamentos
      */
     public PagamentoController(){
+        this.usuarioController = HotelCaliforniaSistema.getUsuarioController();
         this.mapaPagamentos = new HashMap<>();
         this.contadorIdPag = 1;
     }
@@ -35,18 +39,21 @@ public class PagamentoController {
      * @return uma representação textual de confirmação do cadastro
      */
     public String disponibilizarFormaDePagamento(String idAutenticacao,String formaPagamento,double percentualDesconto){
-        if(!HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeDisponibilizarPagamento())
-            throw new IllegalArgumentException("Usuario não pode disponibilizar pagamento");
+        if(!usuarioController.getMapaUsuario().containsKey(idAutenticacao))
+            throw new HotelCaliforniaException("USUARIO NAO EXISTE");
+
+        if(!usuarioController.getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeDisponibilizarPagamento())
+            throw new IllegalArgumentException("NAO E POSSIVEL PARA USUARIO CADASTRAR UMA FORMA DE PAGAMENTO");
 
         for(Pagamento pagamento: mapaPagamentos.values()){
             if(pagamento.getFormaPagamento().equals(formaPagamento))
-                throw new IllegalArgumentException("Tipo de pagamento já está cadastrado");
+                throw new IllegalArgumentException("FORMA DE PAGAMENTO JA EXISTE");
         }
         mapaPagamentos.put(contadorIdPag,new Pagamento(contadorIdPag,formaPagamento,percentualDesconto));
         mapaPagamentos.get(contadorIdPag).setFuncaoPagamento(formaPagamento);
         // atualiza o contador para o próximo cadastro
         contadorIdPag++;
-        return "Pagamento disponibilizado com sucesso";
+        return mapaPagamentos.get(contadorIdPag-1).toString();
     }
 
     /**
@@ -83,10 +90,12 @@ public class PagamentoController {
      * Lista todos os pagamentos
      * @return uma lista de pagamentos
      */
-    public ArrayList<String> listarFormasPagamentos(){
-        ArrayList<String> listaPagamentos = new ArrayList<>();
+    public String[] listarFormasPagamentos(){
+        String[] listaPagamentos = new String[mapaPagamentos.size()];
+        int i = 0;
         for(Pagamento pagamento: mapaPagamentos.values()){
-            listaPagamentos.add(pagamento.toString());
+            listaPagamentos[i] = pagamento.toString();
+            i++;
         }
         return listaPagamentos;
     }

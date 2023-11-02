@@ -2,6 +2,7 @@ package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao;
 
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class RefeicaoController {
      * Cria um controlador de refeição
      */
     public RefeicaoController(){
-        this.usuarioController = UsuarioController.getInstance();
+        this.usuarioController = HotelCaliforniaSistema.getUsuarioController();
         this.mapaRefeicao = new HashMap<>();
         this.contadorIdRefeicao = 1;
     }
@@ -44,26 +45,25 @@ public class RefeicaoController {
      */
     public String disponibilizarRefeicao(String idAutenticacao,String tipoRefeicao,String titulo, LocalTime horarioInicio
             ,LocalTime horarioFinal,double valorRefeicao,boolean disponivel){
+        if(!usuarioController.getMapaUsuario().containsKey(idAutenticacao))
+            throw new HotelCaliforniaException("USUARIO NAO EXISTE");
 
-        if(!(tipoRefeicao.equals("JANTAR") || tipoRefeicao.equals("ALMOCO") || tipoRefeicao.equals("CAFE_DA_MANHA")))
-            throw new IllegalArgumentException("Tipo de refeição inválido");
-
-        if(!HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeCadastrarRefeicao())
-            throw new IllegalArgumentException("Usuário não tem permissão para disponibilizar refeição");
+        if(!usuarioController.getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeCadastrarRefeicao())
+            throw new HotelCaliforniaException("NAO E POSSIVEL PARA USUARIO CADASTRAR UMA REFEICAO");
 
         if(horarioInicio.isAfter(horarioFinal))
-            throw new IllegalArgumentException("Horário de início não pode ser posterior ao horário final");
+            throw new HotelCaliforniaException("HORARIO DE FIM DEVE SER POSTERIOR AO HORARIO DE INICIO");
 
         for(Refeicao refeicao: mapaRefeicao.values()){
             if(refeicao.getTitulo().equals(titulo))
-                throw new IllegalArgumentException("Título de refeição já existe");
+                throw new HotelCaliforniaException("REFEICAO JA EXISTE");
         }
 
         mapaRefeicao.put(contadorIdRefeicao,new Refeicao(contadorIdRefeicao,tipoRefeicao,titulo,horarioInicio,horarioFinal
                 ,valorRefeicao,disponivel));
 
         contadorIdRefeicao++;
-        return "Refeição cadastrada com sucesso";
+        return mapaRefeicao.get(contadorIdRefeicao-1).toString();
     }
 
     /**
@@ -77,12 +77,14 @@ public class RefeicaoController {
      */
     public String atualizarRefeicao(Long idRefeicao, LocalTime horarioInicio, LocalTime horarioFinal, double valorRefeicao
             , boolean disponivel){
+        if(!mapaRefeicao.containsKey(idRefeicao))
+            throw new HotelCaliforniaException("REFEICAO NAO EXISTE");
 
         if(horarioInicio.isAfter(horarioFinal))
-            throw new IllegalArgumentException("Horário de início não pode ser posterior ao horário de término");
+            throw new HotelCaliforniaException("HORARIO DE FIM DEVE SER POSTERIOR AO HORARIO DE INICIO");
 
         mapaRefeicao.get(idRefeicao).atualizarRefeicao(horarioInicio, horarioFinal, valorRefeicao, disponivel);
-        return "Refeição atualizada com sucesso";
+        return mapaRefeicao.get(idRefeicao).toString();
     }
 
     /**
@@ -98,10 +100,12 @@ public class RefeicaoController {
      * Lista os dados de todas as refeições cadastradas
      * @return lista de refeições
      */
-    public ArrayList<String> listarRefeicoes() {
-        ArrayList<String> listaRefeicao = new ArrayList<>();
+    public String[] listarRefeicoes() {
+        String[] listaRefeicao = new String[mapaRefeicao.size()];
+        int i = 0;
         for(Refeicao refeicao:mapaRefeicao.values()){
-            listaRefeicao.add(refeicao.toString());
+            listaRefeicao[i] = refeicao.toString();
+            i++;
         }
         return listaRefeicao;
     }

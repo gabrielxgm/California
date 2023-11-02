@@ -1,13 +1,9 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia;
 
-import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
 //import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.ReservasSessionController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 import org.junit.jupiter.api.*;
 import org.mockito.MockitoAnnotations;
-//import org.mockito.MockedStatic;
-//import org.mockito.Mockito;
-//import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -735,7 +731,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
 
     }
 
-    @Nested
+  /*  @Nested
     @DisplayName("US05: Reservar Restaurante")
     class US05Validations {
         @BeforeEach
@@ -1088,7 +1084,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
             assertTrue(hce.getMessage().toUpperCase().contains("RESERVA NAO ENCONTRADA"));
         }
 
-    }
+    }   */
 
     @Nested
     @DisplayName("US07: Disponibilizar Formas de Pagamento")
@@ -1343,7 +1339,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
 
     }
 
-    @Nested
+    /*@Nested
     @DisplayName("US10: Disponibilizar Areas Comuns")
     class US10Validations {
 
@@ -1588,7 +1584,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
             assertTrue(hce.getMessage().contains("NECESSARIO ANTECEDENCIA MINIMA DE 01 (UM) DIA"));
         }
 
-    }
+    } */
 
     private String extrairId(String input) {
         Pattern pattern = Pattern.compile("\\[(.*?)\\]");

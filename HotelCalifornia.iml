@@ -24,5 +24,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="mockito.core" level="project" />
+    <orderEntry type="library" name="io.github.1tchy.java9modular.apache.commons.compress" level="project" />
   </component>
 </module>

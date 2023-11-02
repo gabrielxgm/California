@@ -70,8 +70,8 @@ public class Pagamento {
     public void setFuncaoPagamento(String funcaoPagamento) {
         switch (funcaoPagamento){
             case "PIX" -> this.funcaoPagamento = new PIX();
-            case "Dinheiro" -> this.funcaoPagamento = new Dinheiro();
-            case "Cartao" -> this.funcaoPagamento = new Cartao();
+            case "DINHEIRO" -> this.funcaoPagamento = new Dinheiro();
+            case "CARTAO" -> this.funcaoPagamento = new Cartao();
             default -> throw new IllegalArgumentException("Forma de pagamento inválida");
         }
     }
@@ -83,6 +83,6 @@ public class Pagamento {
     @Override
     public String toString() {
         return "["+idPagamento+"] Forma de pagamento: "+formaPagamento
-                +" ("+String.format("%.0f",percentualDesconto)+"% de desconto em pagamentos)";
+                +" ("+String.format("%.0f",(percentualDesconto*100))+"% de desconto em pagamentos)";
     }
 }

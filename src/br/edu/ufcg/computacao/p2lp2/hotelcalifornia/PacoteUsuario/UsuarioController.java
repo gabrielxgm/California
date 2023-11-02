@@ -40,20 +40,20 @@ public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String t
         }
 
         if(!mapaUsuario.get(idAutenticacao).getFuncaoUsuario().cadastraUsuario(tipoUsuario))
-        throw new IllegalArgumentException("Usuário não pode cadastrar essa função");
+                throw new IllegalArgumentException("NAO E POSSIVEL PARA USUARIO CADASTRAR UM NOVO USUARIO DO TIPO");
 
         // verifica se existe um gerente no mapa de usuários, e se sim lança uma exceção
         if(verificaSeExisteGerente() && tipoUsuario.equals("GER")){
         for(Usuario usuario: mapaUsuario.values()) {
         if (usuario.getTipoUsuario().equals("GER"))
-        throw new IllegalArgumentException("Já existe um gerente cadastrado");
+                throw new HotelCaliforniaException("SO DEVE HAVER UM GERENTE NO HOTEL");
         }
         }
 
         mapaUsuario.put(tipoUsuario+contadorIdSeq,new Usuario(contadorIdSeq,nomeUsuario,tipoUsuario,documento));
         mapaUsuario.get(tipoUsuario+contadorIdSeq).setFuncaoUsuario(tipoUsuario);
         contadorIdSeq++;
-        return tipoUsuario;
+        return tipoUsuario+(contadorIdSeq-1);
         }
 
 /**
@@ -64,12 +64,14 @@ public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String t
  * @return representação textual de confirmação de atualização
  */
 public String atualizarUsuario(String idAutenticacao,String idUsuario,String novoTipoUsuario) {
+        if(!(mapaUsuario.containsKey(idAutenticacao) && mapaUsuario.containsKey(idUsuario)))
+                throw new HotelCaliforniaException("USUARIO NAO EXISTE");
 
         if(!Objects.equals(mapaUsuario.get(idAutenticacao).getTipoUsuario(), "ADM"))
-        throw new IllegalArgumentException("Somente um administrador pode atualizar um usuário");
+                throw new HotelCaliforniaException("APENAS O ADMINISTRADOR PODE ATUALIZAR OS USUARIOS");
 
         if(Objects.equals(getMapaUsuario().get(idUsuario).getTipoUsuario(),"CLI"))
-        throw new IllegalArgumentException("Cliente não pode ser atualizado");
+                throw new IllegalArgumentException("Cliente não pode ser atualizado");
 
         Usuario usuarioAntigo = mapaUsuario.get(idUsuario);
 
@@ -85,14 +87,14 @@ public String atualizarUsuario(String idAutenticacao,String idUsuario,String nov
         mapaUsuario.get(usuario.getTipoUsuario()+usuario.getIdUsuario()).setFuncaoUsuario(usuario.getTipoUsuario());
         mapaUsuario.remove(usuario.getTipoUsuario()+usuario.getIdUsuario());
         break;
-        }
-        }
+                        }
+                }
         }
 
         mapaUsuario.put(novoTipoUsuario+usuarioAntigo.getIdUsuario(),usuarioAtualizado);
         mapaUsuario.get(novoTipoUsuario+usuarioAntigo.getIdUsuario()).setFuncaoUsuario(novoTipoUsuario);
         mapaUsuario.remove(idUsuario);
-        return "Atualizado com sucesso";
+        return novoTipoUsuario+usuarioAtualizado.getIdUsuario();
         }
 
 
@@ -126,7 +128,7 @@ public String[] listarUsuarios(){
         String[] listaUsuario = new String[mapaUsuario.size()];
         int i = 0;
         for(Usuario usuario:mapaUsuario.values()){
-        listaUsuario[i] = usuario.getTipoUsuario()+usuario.getIdUsuario();
+        listaUsuario[i] = usuario.toString();
         i++;
         }
         return listaUsuario;
@@ -139,11 +141,5 @@ public String[] listarUsuarios(){
 public Map<String, Usuario> getMapaUsuario() {
         return mapaUsuario;
         }
-/**
- * Gera uma instância de usuario controller
- * @return controlador de usuários
- */
-public static UsuarioController getInstance() {
-        return new UsuarioController();
-        }
+
 }

@@ -25,7 +25,7 @@ class HotelCaliforniaSistemaTest {
          }
 
     @Test
-    void testAdministradorCadastraAdministrador() throws Throwable {
+    void testAdministradorCadastraAdministrador() {
         driver.cadastrarUsuario("ADM1","Arlis","ADM",777);
         assertEquals(driver.usuarioController.getMapaUsuario().get("ADM2").getIdUsuario(),2);
         assertEquals(driver.usuarioController.getMapaUsuario().get("ADM2").getTipoUsuario(),"ADM");

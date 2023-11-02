@@ -1,5 +1,7 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao;
 
+import org.junit.platform.commons.util.StringUtils;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -50,7 +52,7 @@ public class Refeicao {
             ,double valorRefeicao,boolean disponivel){
         this.idRefeicao = idRefeicao;
         tipoRefeicao = tipoRefeicao.replaceAll("_","-");
-        tipoRefeicao = tipoRefeicao.substring(0,1).toUpperCase().concat(tipoRefeicao.substring(1));
+        tipoRefeicao = tipoRefeicao.substring(0,1).concat(tipoRefeicao.substring(1).toLowerCase());
         this.tipoRefeicao = tipoRefeicao;
         this.titulo = titulo;
         this.horarioInicio = horarioInicio;
