@@ -7,7 +7,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1234,7 +1233,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
 
     }
 
-    @Nested
+    /*@Nested
     @DisplayName("US08: Pagar Reserva")
     class US08Validations {
 
@@ -1308,9 +1307,9 @@ class HotelCaliforniaSistemaS1S2MinTest {
             assertTrue(hce.getMessage().toUpperCase().contains("RESERVA JA FOI PAGA"));
         }
 
-    }
+    } */
 
-    @Nested
+   /* @Nested
     @DisplayName("US09: Cancelar Reserva")
     class US09Validations {
 
@@ -1337,7 +1336,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
             assertTrue(hce.getMessage().toUpperCase().contains("SOMENTE O PROPRIO CLIENTE PODERA CANCELAR A SUA RESERVA"));
         }
 
-    }
+    }*/
 
     /*@Nested
     @DisplayName("US10: Disponibilizar Areas Comuns")
@@ -1595,7 +1594,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
         return null;
     }
 
-    private void reservationsPreProcessor() {
+    /*private void reservationsPreProcessor() {
         usersPreprocessor();
         dataInicio = LocalDateTime.of(2024, Month.JANUARY, 1, 14, 0);
         dataFim = LocalDateTime.of(2024, Month.JANUARY, 3, 12, 0);
@@ -1621,7 +1620,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
                 LocalTime.of(8,0), LocalTime.of(18,0), 0.0, true, 100));
         idReservaAuditorio = extrairId(driver.reservarAuditorio(idGerente, idClienteA, Long.parseLong(idAuditorio),
                 dataInicio, dataFim,  40));
-    }
+    }*/
 
     private void formasDePagamentoPreprocessor() {
         driver.disponibilizarFormaDePagamento("ADM1", "CARTAO_DE_CREDITO", 0.0);

@@ -179,9 +179,8 @@ public class HotelCaliforniaSistema {
 	 * @param idCliente id do cliente
 	 * @param idReserva id da reserva
 	 * @return representação textual de confirmação do cancelamento da reserva
-	 * @throws Exception cancelamento fora do prazo estipulado
 	 */
-	public String cancelarReserva(String idCliente,String idReserva) throws Exception {
+	public String cancelarReserva(String idCliente,String idReserva) {
 		return reservaDeQuartoControler.cancelarReserva(idCliente,idReserva);
 	}
 

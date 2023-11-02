@@ -4,6 +4,8 @@ import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.Usuario;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US02.QuartoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao.Refeicao;
+import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
+
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +39,7 @@ public class ReservaDeQuartoControler {
 
     }
 
-    public String cancelarReserva(String idCliente,String idReserva) throws Exception {
+    public String cancelarReserva(String idCliente,String idReserva) {
         if(!HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idCliente).getFuncaoUsuario().podePagarReserva())
             throw new IllegalArgumentException("Usuário não pode pagar reserva");
 
@@ -45,9 +47,9 @@ public class ReservaDeQuartoControler {
             throw new IllegalArgumentException("Somente o cliente que fez o cadastro da reserva pode fazer seu pagamento");
 
         if(ChronoUnit.DAYS.between(LocalDateTime.now(),mapReservas.get(Integer.parseInt(idReserva)).getDataInicio()) < 1)
-            throw new Exception("Só é possível cancelar a reserva até 1 dia antes de seu início");
+            throw new HotelCaliforniaException("Só é possível cancelar a reserva até 1 dia antes de seu início");
 
         mapReservas.get(Integer.parseInt(idReserva)).setStatusCancelado(true);
-        return "Reserva cancelada";
+        return mapReservas.get(Integer.parseInt(idReserva)).toString();
     }
 }
