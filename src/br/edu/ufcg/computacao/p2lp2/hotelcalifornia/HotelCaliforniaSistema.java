@@ -1,15 +1,12 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia;
 
-import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao.Refeicao;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US02.QuartoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.US03.ReservaDeQuartoControler;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteRefeicao.RefeicaoController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacotePagamento.PagamentoController;
-import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 /**
  * Classe do sistema de hotel California

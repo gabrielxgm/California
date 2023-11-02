@@ -1,6 +1,6 @@
 package br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario;
+
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -14,7 +14,6 @@ private Map<String,Usuario> mapaUsuario;
  * Contador sequencial de identificação do usuário
  */
 private static int contadorIdSeq;
-private static HotelCaliforniaException hce;
 
 /**
  * Cria um controlador de usuários

@@ -4,7 +4,6 @@ import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.HotelCaliforniaSistema;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.PacoteUsuario.UsuarioController;
 import br.edu.ufcg.computacao.p2lp2.hotelcalifornia.exception.HotelCaliforniaException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
