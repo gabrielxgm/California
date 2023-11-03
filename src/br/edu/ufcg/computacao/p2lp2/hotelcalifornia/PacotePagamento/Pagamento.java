@@ -29,6 +29,7 @@ public class Pagamento {
      */
     Pagamento(int idPagamento, String formaPagamento,double percentualDesconto){
         this.idPagamento = idPagamento;
+        formaPagamento= formaPagamento.replaceAll("_"," ");
         this.formaPagamento = formaPagamento;
         this.percentualDesconto = percentualDesconto;
     }
@@ -71,7 +72,7 @@ public class Pagamento {
         switch (funcaoPagamento){
             case "PIX" -> this.funcaoPagamento = new PIX();
             case "DINHEIRO" -> this.funcaoPagamento = new Dinheiro();
-            case "CARTAO" -> this.funcaoPagamento = new Cartao();
+            case "CARTAO_DE_CREDITO" -> this.funcaoPagamento = new Cartao();
             default -> throw new IllegalArgumentException("Forma de pagamento inválida");
         }
     }

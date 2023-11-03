@@ -39,7 +39,7 @@ public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String t
         }
 
         if(!mapaUsuario.get(idAutenticacao).getFuncaoUsuario().cadastraUsuario(tipoUsuario))
-                throw new IllegalArgumentException("NAO E POSSIVEL PARA USUARIO CADASTRAR UM NOVO USUARIO DO TIPO");
+                throw new HotelCaliforniaException("NAO E POSSIVEL PARA USUARIO CADASTRAR UM NOVO USUARIO DO TIPO");
 
         // verifica se existe um gerente no mapa de usuários, e se sim lança uma exceção
         if(verificaSeExisteGerente() && tipoUsuario.equals("GER")){
@@ -52,7 +52,7 @@ public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String t
         mapaUsuario.put(tipoUsuario+contadorIdSeq,new Usuario(contadorIdSeq,nomeUsuario,tipoUsuario,documento));
         mapaUsuario.get(tipoUsuario+contadorIdSeq).setFuncaoUsuario(tipoUsuario);
         contadorIdSeq++;
-        return tipoUsuario+(contadorIdSeq-1);
+        return mapaUsuario.get(tipoUsuario+(contadorIdSeq-1)).toString();
         }
 
 /**
@@ -93,7 +93,7 @@ public String atualizarUsuario(String idAutenticacao,String idUsuario,String nov
         mapaUsuario.put(novoTipoUsuario+usuarioAntigo.getIdUsuario(),usuarioAtualizado);
         mapaUsuario.get(novoTipoUsuario+usuarioAntigo.getIdUsuario()).setFuncaoUsuario(novoTipoUsuario);
         mapaUsuario.remove(idUsuario);
-        return novoTipoUsuario+usuarioAtualizado.getIdUsuario();
+        return usuarioAtualizado.toString();
         }
 
 

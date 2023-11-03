@@ -42,11 +42,11 @@ public class PagamentoController {
             throw new HotelCaliforniaException("USUARIO NAO EXISTE");
 
         if(!usuarioController.getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeDisponibilizarPagamento())
-            throw new IllegalArgumentException("NAO E POSSIVEL PARA USUARIO CADASTRAR UMA FORMA DE PAGAMENTO");
+            throw new HotelCaliforniaException("NAO E POSSIVEL PARA USUARIO CADASTRAR UMA FORMA DE PAGAMENTO");
 
         for(Pagamento pagamento: mapaPagamentos.values()){
             if(pagamento.getFormaPagamento().equals(formaPagamento))
-                throw new IllegalArgumentException("FORMA DE PAGAMENTO JA EXISTE");
+                throw new HotelCaliforniaException("FORMA DE PAGAMENTO JA EXISTE");
         }
         mapaPagamentos.put(contadorIdPag,new Pagamento(contadorIdPag,formaPagamento,percentualDesconto));
         mapaPagamentos.get(contadorIdPag).setFuncaoPagamento(formaPagamento);
@@ -73,7 +73,7 @@ public class PagamentoController {
         }
 
         mapaPagamentos.get(idFormaPagamento).setPercentualDesconto(percentualDesconto);
-        return "Pagamento atualizado com sucesso";
+        return mapaPagamentos.get(idFormaPagamento).toString();
     }
 
     /**

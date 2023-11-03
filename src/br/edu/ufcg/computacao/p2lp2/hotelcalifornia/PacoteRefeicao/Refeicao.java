@@ -84,7 +84,7 @@ public class Refeicao {
         if(disponivel){
             disponibilidade = "VIGENTE";
         } else {
-            disponibilidade = "INDISPONÍVEL";
+            disponibilidade = "INDISPONIVEL";
         }
         DateTimeFormatter formatterHora =DateTimeFormatter.ofPattern("HH");
         DateTimeFormatter formatterMinuto = DateTimeFormatter.ofPattern("mm");

@@ -1586,7 +1586,7 @@ class HotelCaliforniaSistemaS1S2MinTest {
     } */
 
     private String extrairId(String input) {
-        Pattern pattern = Pattern.compile("\\[(.*?)\\]");
+        Pattern pattern = Pattern.compile("\\[(.*?)]");
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             return matcher.group(1);
