@@ -13,7 +13,7 @@ private Map<String,Usuario> mapaUsuario;
 /**
  * Contador sequencial de identificação do usuário
  */
-private static int contadorIdSeq;
+private int contadorIdSeq;
 
 /**
  * Cria um controlador de usuários
@@ -69,23 +69,20 @@ public String atualizarUsuario(String idAutenticacao,String idUsuario,String nov
         if(!Objects.equals(mapaUsuario.get(idAutenticacao).getTipoUsuario(), "ADM"))
                 throw new HotelCaliforniaException("APENAS O ADMINISTRADOR PODE ATUALIZAR OS USUARIOS");
 
-        if(Objects.equals(getMapaUsuario().get(idUsuario).getTipoUsuario(),"CLI"))
-                throw new IllegalArgumentException("Cliente não pode ser atualizado");
-
         Usuario usuarioAntigo = mapaUsuario.get(idUsuario);
 
         Usuario usuarioAtualizado = new Usuario(usuarioAntigo.getIdUsuario(),usuarioAntigo.getNomeUsuario()
-        ,novoTipoUsuario,usuarioAntigo.getDocumento());
+                ,novoTipoUsuario,usuarioAntigo.getDocumento());
 
         // verifica se existe gerente no mapa de usuários, e se sim o altera para um funcionário
         if(novoTipoUsuario.equals("GER") && verificaSeExisteGerente()){
-        for(Usuario usuario: mapaUsuario.values()){
-        if(usuario.getTipoUsuario().equals("GER")){
-        mapaUsuario.put("FUN"+usuario.getIdUsuario(),new Usuario(usuario.getIdUsuario()
-        ,usuario.getNomeUsuario(), "FUN",usuario.getDocumento()));
-        mapaUsuario.get(usuario.getTipoUsuario()+usuario.getIdUsuario()).setFuncaoUsuario(usuario.getTipoUsuario());
-        mapaUsuario.remove(usuario.getTipoUsuario()+usuario.getIdUsuario());
-        break;
+                for(Usuario usuario: mapaUsuario.values()){
+                        if(usuario.getTipoUsuario().equals("GER")){
+                                mapaUsuario.put("FUN"+usuario.getIdUsuario(),new Usuario(usuario.getIdUsuario()
+                                        ,usuario.getNomeUsuario(), "FUN",usuario.getDocumento()));
+                                mapaUsuario.get(usuario.getTipoUsuario()+usuario.getIdUsuario()).setFuncaoUsuario(usuario.getTipoUsuario());
+                                mapaUsuario.remove(usuario.getTipoUsuario()+usuario.getIdUsuario());
+                                break;
                         }
                 }
         }

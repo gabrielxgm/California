@@ -31,7 +31,11 @@ class HotelCaliforniaSistemaS1S2MinTest {
 
     @AfterEach
     void tearDown() throws Exception {
-        driver = null;
+        HotelCaliforniaSistema.usuarioController = null;
+        HotelCaliforniaSistema.pagamentoController = null;
+        HotelCaliforniaSistema.reservaDeQuartoControler = null;
+        HotelCaliforniaSistema.refeicaoController = null;
+        HotelCaliforniaSistema.quartoController = null;
     }
 
     @Nested

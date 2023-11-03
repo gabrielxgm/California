@@ -15,7 +15,7 @@ public class HotelCaliforniaSistema {
 	/**
 	 * Controlador de usuários
 	 */
-	 static UsuarioController usuarioController;
+	static UsuarioController usuarioController;
 	/**
 	 * Controlador de refeição
 	 */
@@ -36,24 +36,18 @@ public class HotelCaliforniaSistema {
 	/**
 	 * Cria um sistema do hotel California
 	 */
-	HotelCaliforniaSistema(){
-		usuarioController = new UsuarioController();
-		refeicaoController = new RefeicaoController();
-		pagamentoController = new PagamentoController();
-		quartoController = new QuartoController();
-		reservaDeQuartoControler = new ReservaDeQuartoControler();
-	}
+	HotelCaliforniaSistema(){}
 
 	/**
 	 * Cadastra um usuário
 	 * @param idAutenticacao id autenticador do usuário
 	 * @param nomeUsuario nome do usuário novo
 	 * @param tipoUsuario tipo do usuário novo
-	 * @param documento documento do usuário nov
+	 * @param documento documento do usuário novo
 	 * @return representação textual de confirmação do cadastro
 	 */
 	public String cadastrarUsuario(String idAutenticacao,String nomeUsuario,String tipoUsuario,long documento) {
-		return usuarioController.cadastrarUsuario(idAutenticacao, nomeUsuario, tipoUsuario, documento);
+		return getUsuarioController().cadastrarUsuario(idAutenticacao, nomeUsuario, tipoUsuario, documento);
 	}
 
 	/**
@@ -64,7 +58,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de confirmação da atualização
 	 */
 	public String atualizarUsuario(String idAutenticacao, String idUsuario, String novoTipoUsuario) {
-		return usuarioController.atualizarUsuario(idAutenticacao, idUsuario, novoTipoUsuario);
+		return getUsuarioController().atualizarUsuario(idAutenticacao, idUsuario, novoTipoUsuario);
 	}
 
 	/**
@@ -73,7 +67,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de um usuário
 	 */
 	public String exibirUsuario(String idUsuario){
-		return usuarioController.exibirUsuario(idUsuario);
+		return getUsuarioController().exibirUsuario(idUsuario);
 	}
 
 	/**
@@ -81,7 +75,7 @@ public class HotelCaliforniaSistema {
 	 * @return lista de todos os usuários cadastrados
 	 */
 	public String[] listarUsuarios(){
-		return usuarioController.listarUsuarios();
+		return getUsuarioController().listarUsuarios();
 	}
 
 	/**
@@ -97,7 +91,7 @@ public class HotelCaliforniaSistema {
 	 */
 	public String disponibilizarRefeicao(String idAutenticacao,String tipoRefeicao, String titulo, LocalTime horarioInicio
 			,LocalTime horarioFinal,double valorRefeicao,boolean disponivel){
-		return refeicaoController.disponibilizarRefeicao(idAutenticacao, tipoRefeicao, titulo, horarioInicio, horarioFinal, valorRefeicao, disponivel);
+		return getRefeicaoController().disponibilizarRefeicao(idAutenticacao, tipoRefeicao, titulo, horarioInicio, horarioFinal, valorRefeicao, disponivel);
 	}
 
 	/**
@@ -111,7 +105,7 @@ public class HotelCaliforniaSistema {
 	 */
 	public String alterarRefeicao(long idRefeicao,LocalTime horarioInicio,LocalTime horarioFinal,double valorRefeicao
 			,boolean disponivel){
-		return refeicaoController.atualizarRefeicao(idRefeicao,horarioInicio,horarioFinal,valorRefeicao,disponivel);
+		return getRefeicaoController().atualizarRefeicao(idRefeicao,horarioInicio,horarioFinal,valorRefeicao,disponivel);
 	}
 
 	/**
@@ -120,7 +114,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de uma refeição
 	 */
 	public String exibirRefeicao(long idRefeicao){
-		return refeicaoController.exibirRefeicao(idRefeicao);
+		return getRefeicaoController().exibirRefeicao(idRefeicao);
 	}
 
 	/**
@@ -128,7 +122,7 @@ public class HotelCaliforniaSistema {
 	 * @return lista de refeições
 	 */
 	public String[] listarRefeicoes(){
-		return refeicaoController.listarRefeicoes();
+		return getRefeicaoController().listarRefeicoes();
 	}
 
 	/**
@@ -139,7 +133,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de confirmação de cadastro do pagamento
 	 */
 	public String disponibilizarFormaDePagamento(String idAutenticacao,String formaPagamento,double percentualDesconto){
-		return pagamentoController.disponibilizarFormaDePagamento(idAutenticacao,formaPagamento,percentualDesconto);
+		return getPagamentoController().disponibilizarFormaDePagamento(idAutenticacao,formaPagamento,percentualDesconto);
 	}
 
 	/**
@@ -151,7 +145,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de confirmação de atualização do pagamento
 	 */
 	public String alterarFormaDePagamento(String idAutenticacao,int idFormaPagamento,String formaPagamento,double percentualDesconto){
-		return pagamentoController.atualizarPagamento(idAutenticacao, idFormaPagamento, formaPagamento, percentualDesconto);
+		return getPagamentoController().atualizarPagamento(idAutenticacao, idFormaPagamento, formaPagamento, percentualDesconto);
 	}
 
 	/**
@@ -160,7 +154,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de um pagamento
 	 */
 	public String exibirFormaPagamento(int idFormaPagamento){
-		return pagamentoController.exibirFormaPagamento(idFormaPagamento);
+		return getPagamentoController().exibirFormaPagamento(idFormaPagamento);
 	}
 
 	/**
@@ -168,7 +162,7 @@ public class HotelCaliforniaSistema {
 	 * @return lista de pagamentos
 	 */
 	public String[] listarFormasPagamentos(){
-		return pagamentoController.listarFormasPagamentos();
+		return getPagamentoController().listarFormasPagamentos();
 	}
 
 	/**
@@ -178,7 +172,7 @@ public class HotelCaliforniaSistema {
 	 * @return representação textual de confirmação do cancelamento da reserva
 	 */
 	public String cancelarReserva(String idCliente,String idReserva) {
-		return reservaDeQuartoControler.cancelarReserva(idCliente,idReserva);
+		return getReservaDeQuartoControler().cancelarReserva(idCliente,idReserva);
 	}
 
 	public static synchronized UsuarioController getUsuarioController() {
@@ -192,5 +186,17 @@ public class HotelCaliforniaSistema {
 			refeicaoController = new RefeicaoController();
 		}
 		return refeicaoController;
+	}
+	public static synchronized ReservaDeQuartoControler getReservaDeQuartoControler(){
+		if(reservaDeQuartoControler == null){
+			reservaDeQuartoControler = new ReservaDeQuartoControler();
+		}
+		return reservaDeQuartoControler;
+	}
+	public static synchronized PagamentoController getPagamentoController(){
+		if(pagamentoController == null){
+			pagamentoController = new PagamentoController();
+		}
+		return pagamentoController;
 	}
 }

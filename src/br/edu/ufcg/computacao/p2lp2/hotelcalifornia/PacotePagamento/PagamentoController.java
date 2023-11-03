@@ -64,7 +64,7 @@ public class PagamentoController {
      * @return representação textual de confirmação de atualização
      */
     public String atualizarPagamento(String idAutenticacao,int idFormaPagamento,String formaPagamento,double percentualDesconto){
-        if(!HotelCaliforniaSistema.getUsuarioController().getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeDisponibilizarPagamento())
+        if(!usuarioController.getMapaUsuario().get(idAutenticacao).getFuncaoUsuario().podeDisponibilizarPagamento())
             throw new IllegalArgumentException("Usuário não tem permissão para atualizar o pagamento");
 
         for(Pagamento pagamento: mapaPagamentos.values()){
